@@ -1,0 +1,111 @@
+workspace
+	index
+repository
+remote
+
+git add 文件
+git commit 
+git status
+git diff 
+
+git reset --hard HEAD^
+git reset --hard HEAD^^
+git reset --hard HEAD~100
+git reflog 
+git reset --hard 6fcfc89
+
+
+ssh-keygen -t rsa –C “1359742179@qq.com”
+
+git remote add origin https://github.com/LZLDJD/testgit.git
+
+git push -u origin master
+
+
+http://dnptystore.qbox.me/p/chapter/attachment/EgfSetvEt-/Eg6s4gEwet2We_MVe_2SeTuDGN95Gb9ugvMq972t5c9heCmc9mH26_b.jpg
+
+
+https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202002%2F22%2F20200222214729_pprmp.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1663743742&t=19132d2c15ee76662b55de286a3a402f
+
+charset="gbk/utf-8"
+
+git区域
+
+本地工作区 workspace--git add 脚本-->暂存区 index
+
+暂存区 index--git commit 脚本-->版本库 repository
+	git commit -m ''  脚本
+
+版本库 repository --push 脚本-->远程仓库 remote
+	git push 
+远程仓库 remote--pull 脚本-->本地工作目录 workspace
+
+
+1.创建版本库
+mkdir testgit
+cd testgit
+git init 
+
+2.添加文件到版本库
+--再testgit目录创建文件 test.txt
+git add test.txt
+git commit test.txt
+git status  #查看添加状态
+git diff test.txt #txt文件改变前后的内容的对比
+
+3.版本回退
+git log  #查看历史修改各个状态
+git log -pertty=oneline  #简略查看历史修改记录
+
+git reset --hard  HEAD^ #回退上一版本
+git reset --hard HEAD^^ #回退上两个版本
+cat test.txt
+
+git reflog #获取每次修改的版本号
+git reset --hard 版本号 #进行退回
+
+4.撤销add的文件
+文件修改后为add到index区  可git checkout --file 可以丢弃工作区的修改
+git checkout --test.txt
+
+5.删除文件
+rm test.txt
+git  checkout -- test.txt #恢复被删除的txt文件
+commit  #彻底删除
+
+6.远程仓库
+--github 先注册
+--找到主目录下的.ssh 并找到id_rsa(私钥)与id_rsa.pub(公钥)
+--输入命令 ssh-keygen -t rsa –C “youremail@example.com”
+--ssh连接 github与本地git库连接 github--setting中点击ADD SSH key放入id_rsa.pub
+--添加github的git 与本地repository进行同步备份--登录github上，然后在右上角找到“create a new repo”创建一个新的仓库
+--在Repository name填入testgit，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库
+--将本地与github的仓库进行关联 命令：git remote add origin https://github.com/tugenhua0707/testgit.git
+--将本地分支master的内容推送到远程仓库 命令：git push -u origin master  
+备注：
+(由于远程库是空的，我们第一次推送master分支时，加上了 –u参数，
+Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，
+在以后的推送或者拉取时就可以简化命令。推送成功后，可以立刻在github页面中看到远程库的内容已经和本地一模一样了)
+
+6.1 后续提交内容至remote
+--从现在起，只要本地作了提交，就可以通过如下命令：
+git push origin master
+
+
+6.2 remote--clone克隆--workspace本地工作区
+--先再github上创建一个远程--克隆--本地的库 New repository  testgit2库
+--进入git 输入 git clone "https://github.com/..." #你的github地址
+--之后本地会生成一个testgit2 目录
+
+7.分支创建
+主分支--master
+git checkout -b dev       --分支名dev 创建分支
+git branch #查看分支
+git checkout  master #切换到master分支
+--dev 分支修改文件test.txt
+git add test.txt
+git commit -m ''
+git checkout master
+git merge dev  #合并dev分支的内容到master
+git branch -d dev #合并完可以删除dev分支
+
